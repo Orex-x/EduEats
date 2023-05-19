@@ -17,7 +17,7 @@ import java.util.List;
 public class AuthActivity extends AppCompatActivity {
 
     private EditText edtLogin, edtPassword;
-    private Button btnLogin;
+    private Button btnLogin, btnReg;
 
 
     @Override
@@ -27,7 +27,9 @@ public class AuthActivity extends AppCompatActivity {
 
         edtLogin = findViewById(R.id.edtLogin);
         edtPassword = findViewById(R.id.edtPassword);
+
         btnLogin = findViewById(R.id.btnLogin);
+        btnReg = findViewById(R.id.btnReg);
 
         btnLogin.setOnClickListener(v -> {
             try{
@@ -57,6 +59,11 @@ public class AuthActivity extends AppCompatActivity {
             }catch (Exception ex){
                 Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
+        });
+
+        btnReg.setOnClickListener(v -> {
+            Intent intent = new Intent(this, RegistrationActivity.class);
+            startActivity(intent);
         });
     }
 

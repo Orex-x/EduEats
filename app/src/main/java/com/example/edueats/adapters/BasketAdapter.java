@@ -14,6 +14,7 @@ import com.example.edueats.R;
 import com.example.edueats.models.ProductBasket;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class BasketAdapter extends ArrayAdapter<ProductBasket> {
 
@@ -35,6 +36,8 @@ public class BasketAdapter extends ArrayAdapter<ProductBasket> {
 
 
     public View getView(int position, View convertView, ViewGroup parent) {
+
+
 
         final BasketAdapter.ViewHolder viewHolder;
         if(convertView==null){

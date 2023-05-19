@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_baseline_account_circle_24"
         android:title="Аккаунт" />
 
+    <item
+        android:id="@+id/navigation_favorite_products"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="Избранное" />
+
 </menu>

@@ -1,6 +1,5 @@
 package com.example.edueats.adapters;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +10,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.edueats.R;
-import com.example.edueats.interfaces.IBasketAdapter;
 import com.example.edueats.interfaces.IProductAdapter;
 import com.example.edueats.models.Product;
 
 import java.util.ArrayList;
 
-public class ProductAdapter extends ArrayAdapter<Product> {
+public class ProductFavoriteAdapter extends ArrayAdapter<Product> {
 
     private LayoutInflater inflater;
     private int layout;
     private ArrayList<Product> productList;
 
-    public ProductAdapter(Context context, int resource, ArrayList<Product> products) {
+    public ProductFavoriteAdapter(Context context, int resource, ArrayList<Product> products) {
         super(context, resource, products);
         this.productList = products;
         this.layout = resource;
@@ -34,6 +32,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     public void setIProductAdapter(IProductAdapter listener) {
         mListener = listener;
     }
+
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -54,13 +53,15 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         return convertView;
     }
+
+
     private class ViewHolder {
 
         final TextView txtName;
         final TextView txtPrice;
         final TextView txtDescription;
         final ImageView imageView;
-        final Button btn, btnLove;
+        final Button btn, btnDel;
 
         ViewHolder(View view, int position){
             txtName = view.findViewById(R.id.txtName);
@@ -68,10 +69,10 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             txtDescription = view.findViewById(R.id.txtDescription);
             imageView = view.findViewById(R.id.imageView);
             btn = view.findViewById(R.id.btn);
-            btnLove = view.findViewById(R.id.btnLove);
+            btnDel = view.findViewById(R.id.btnDel);
 
             btn.setOnClickListener(v -> mListener.addToBasket(position));
-            btnLove.setOnClickListener(v -> mListener.addToFavorite(position));
+            btnDel.setOnClickListener(v -> mListener.deleteToFavorite(position));
         }
     }
 }

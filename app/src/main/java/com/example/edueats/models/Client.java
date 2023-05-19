@@ -24,10 +24,19 @@ public class Client {
     }
 
 
-    public void addProductTOBasket(Product product){
+    public void addProductToBasket(Product product){
         ProductBasket pb = new ProductBasket(0, product, 1, 0);
         this.basket.add(pb);
     }
+
+    public void addProductToFavorite(Product product){
+        this.favoriteProducts.add(product);
+    }
+
+    public void deleteProductToFavorite(Product product){
+        this.favoriteProducts.remove(product);
+    }
+
     public void spend(int x){
         this.balance -= x;
     }

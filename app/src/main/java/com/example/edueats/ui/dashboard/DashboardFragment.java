@@ -58,6 +58,7 @@ public class DashboardFragment extends Fragment implements IBasketAdapter {
             }
 
             SingletonService.mainClient.spend(sum);
+
             ApiClient.update(SingletonService.mainClient);
 
             Intent intent = new Intent(getContext(), CheckActivity.class);
