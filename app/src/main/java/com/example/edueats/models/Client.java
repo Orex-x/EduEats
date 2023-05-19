@@ -30,10 +30,11 @@ public class Client {
     }
 
     public void addProductToFavorite(Product product){
+        product.setId(0);
         this.favoriteProducts.add(product);
     }
 
-    public void deleteProductToFavorite(Product product){
+    public void removeProductToFavorite(Product product){
         this.favoriteProducts.remove(product);
     }
 

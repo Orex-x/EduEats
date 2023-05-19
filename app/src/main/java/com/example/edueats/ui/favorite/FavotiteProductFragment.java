@@ -56,9 +56,8 @@ public class FavotiteProductFragment extends Fragment implements IProductAdapter
     @Override
     public void deleteToFavorite(int position) {
         Product product = products.get(position);
-        SingletonService.mainClient.deleteProductToFavorite(product);
-        ApiClient.update(SingletonService.mainClient);
-
+        SingletonService.mainClient.removeProductToFavorite(product);
+        ApiClient.delete(product.getId(), Product.class);
         products.remove(product);
         adapter.notifyDataSetChanged();
     }
