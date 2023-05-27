@@ -36,7 +36,7 @@ public class AuthActivity extends AppCompatActivity {
                 String login = edtLogin.getText().toString();
                 String password = edtPassword.getText().toString();
 
-                if(login.length() == 0 || password.length() ==0){
+                if(login.length() == 0 || password.length() == 0){
                     Toast.makeText(this, "Заполните поля", Toast.LENGTH_SHORT).show();
                     return;
                 }

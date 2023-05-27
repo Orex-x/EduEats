@@ -11,17 +11,18 @@ import android.widget.TextView;
 
 import com.example.edueats.R;
 import com.example.edueats.interfaces.IProductAdapter;
+import com.example.edueats.models.FavoriteProduct;
 import com.example.edueats.models.Product;
 
 import java.util.ArrayList;
 
-public class ProductFavoriteAdapter extends ArrayAdapter<Product> {
+public class ProductFavoriteAdapter extends ArrayAdapter<FavoriteProduct> {
 
     private LayoutInflater inflater;
     private int layout;
-    private ArrayList<Product> productList;
+    private ArrayList<FavoriteProduct> productList;
 
-    public ProductFavoriteAdapter(Context context, int resource, ArrayList<Product> products) {
+    public ProductFavoriteAdapter(Context context, int resource, ArrayList<FavoriteProduct> products) {
         super(context, resource, products);
         this.productList = products;
         this.layout = resource;
@@ -45,11 +46,11 @@ public class ProductFavoriteAdapter extends ArrayAdapter<Product> {
         else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        final Product product = productList.get(position);
+        final FavoriteProduct favoriteProduct = productList.get(position);
 
-        viewHolder.txtName.setText(product.getName());
-        viewHolder.txtDescription.setText(product.getDescription());
-        viewHolder.txtPrice.setText(String.valueOf(product.getPrice()));
+        viewHolder.txtName.setText(favoriteProduct.getProduct().getName());
+        viewHolder.txtDescription.setText(favoriteProduct.getProduct().getDescription());
+        viewHolder.txtPrice.setText(String.valueOf(favoriteProduct.getProduct().getPrice()));
 
         return convertView;
     }

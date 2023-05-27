@@ -13,7 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.edueats.AddCardActivity;
 import com.example.edueats.CheckActivity;
+import com.example.edueats.PayActivity;
 import com.example.edueats.interfaces.IBasketAdapter;
 import com.example.edueats.R;
 import com.example.edueats.adapters.BasketAdapter;
@@ -51,22 +53,9 @@ public class DashboardFragment extends Fragment implements IBasketAdapter {
         setSum();
 
         btnBuy.setOnClickListener(view -> {
-            int sum = Integer.parseInt(txtSum.getText().toString());
-            if(sum > SingletonService.mainClient.getBalance()){
-                Toast.makeText(getContext(), "У вас не достаточно средств", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            SingletonService.mainClient.spend(sum);
-
-            ApiClient.update(SingletonService.mainClient);
-
-            Intent intent = new Intent(getContext(), CheckActivity.class);
+            SingletonService.sumOrder = Integer.parseInt(txtSum.getText().toString());
+            Intent intent = new Intent(getContext(), PayActivity.class);
             startActivity(intent);
-
-            products.clear();
-            adapter.notifyDataSetChanged();
-            setSum();
         });
 
         return v;

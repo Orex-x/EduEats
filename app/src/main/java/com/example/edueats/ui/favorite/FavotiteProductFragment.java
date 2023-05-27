@@ -13,6 +13,7 @@ import com.example.edueats.R;
 import com.example.edueats.adapters.ProductAdapter;
 import com.example.edueats.adapters.ProductFavoriteAdapter;
 import com.example.edueats.interfaces.IProductAdapter;
+import com.example.edueats.models.FavoriteProduct;
 import com.example.edueats.models.Product;
 import com.example.edueats.services.ApiClient;
 import com.example.edueats.services.SingletonService;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 public class FavotiteProductFragment extends Fragment implements IProductAdapter {
 
     private ListView list_product;
-    ArrayList<Product> products;
+    ArrayList<FavoriteProduct> favoriteProducts;
     ProductFavoriteAdapter adapter;
 
     @Override
@@ -33,8 +34,8 @@ public class FavotiteProductFragment extends Fragment implements IProductAdapter
 
         list_product = v.findViewById(R.id.list_product);
 
-        products = new ArrayList<>(SingletonService.mainClient.getFavoriteProducts());
-        adapter = new ProductFavoriteAdapter(getContext(), R.layout.item_favorite_product, products);
+        favoriteProducts = new ArrayList<>(SingletonService.mainClient.getFavoriteProducts());
+        adapter = new ProductFavoriteAdapter(getContext(), R.layout.item_favorite_product, favoriteProducts);
         adapter.setIProductAdapter(this);
         list_product.setAdapter(adapter);
 
@@ -43,8 +44,8 @@ public class FavotiteProductFragment extends Fragment implements IProductAdapter
 
     @Override
     public void addToBasket(int position) {
-        Product product = products.get(position);
-        SingletonService.mainClient.addProductToBasket(product);
+        FavoriteProduct favoriteProduct = favoriteProducts.get(position);
+        SingletonService.mainClient.addProductToBasket(favoriteProduct.getProduct());
         ApiClient.update(SingletonService.mainClient);
     }
 
@@ -55,10 +56,10 @@ public class FavotiteProductFragment extends Fragment implements IProductAdapter
 
     @Override
     public void deleteToFavorite(int position) {
-        Product product = products.get(position);
-        SingletonService.mainClient.removeProductToFavorite(product);
-        ApiClient.delete(product.getId(), Product.class);
-        products.remove(product);
+        FavoriteProduct favoriteProduct = favoriteProducts.get(position);
+        SingletonService.mainClient.removeProductToFavorite(favoriteProduct);
+        ApiClient.delete(favoriteProduct.getId(), FavoriteProduct.class);
+        favoriteProducts.remove(favoriteProduct);
         adapter.notifyDataSetChanged();
     }
 }

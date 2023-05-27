@@ -34,7 +34,8 @@ public class NetworkThread extends Thread {
                 .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
+            String res = response.body().string();
+            return res;
         }
     }
 

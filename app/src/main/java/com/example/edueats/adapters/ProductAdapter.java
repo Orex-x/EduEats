@@ -14,6 +14,7 @@ import com.example.edueats.R;
 import com.example.edueats.interfaces.IBasketAdapter;
 import com.example.edueats.interfaces.IProductAdapter;
 import com.example.edueats.models.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         viewHolder.txtName.setText(product.getName());
         viewHolder.txtDescription.setText(product.getDescription());
         viewHolder.txtPrice.setText(String.valueOf(product.getPrice()));
+        Picasso.get().load(product.getPathToImage()).into(viewHolder.imageView);
 
         return convertView;
     }
@@ -67,6 +69,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             txtPrice = view.findViewById(R.id.txtPrice);
             txtDescription = view.findViewById(R.id.txtDescription);
             imageView = view.findViewById(R.id.imageView);
+
             btn = view.findViewById(R.id.btn);
             btnLove = view.findViewById(R.id.btnLove);
 

@@ -8,6 +8,8 @@ public class SingletonService {
 
     public static Client mainClient;
 
+    public static int sumOrder;
+
     public static void clear(){
         mainClient = null;
     }

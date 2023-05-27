@@ -2,6 +2,7 @@ package com.example.edueats;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -37,5 +38,11 @@ public class CheckActivity extends AppCompatActivity {
 
         SingletonService.mainClient.clearBasket();
         ApiClient.update(SingletonService.mainClient);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

@@ -2,6 +2,7 @@ package com.example.edueats.models;
 
 import com.example.edueats.services.ApiClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
@@ -14,13 +15,21 @@ public class Client {
 
     private int balance;
 
-    private List<Product> favoriteProducts;
+    private List<FavoriteProduct> favoriteProducts;
 
     private List<ProductBasket> basket;
 
     private List<Order> orders;
 
+    private List<BankCard> bankCards;
+
     public Client() {
+    }
+
+
+    public void addBankCard(BankCard card){
+        if(bankCards == null) bankCards = new ArrayList<>();
+        this.bankCards.add(card);
     }
 
 
@@ -30,11 +39,11 @@ public class Client {
     }
 
     public void addProductToFavorite(Product product){
-        product.setId(0);
-        this.favoriteProducts.add(product);
+        FavoriteProduct favoriteProduct = new FavoriteProduct(0, product, product.getId());
+        this.favoriteProducts.add(favoriteProduct);
     }
 
-    public void removeProductToFavorite(Product product){
+    public void removeProductToFavorite(FavoriteProduct product){
         this.favoriteProducts.remove(product);
     }
 
@@ -57,15 +66,18 @@ public class Client {
 
     //public void incrementProductInBasket(int)
 
-    public Client(int id, int userId, User user, int balance, List<Product> favoriteProducts, List<ProductBasket> basket, List<Order> orders) {
+
+    public Client(int id, int userId, User user, int balance, List<BankCard> bankCards, List<FavoriteProduct> favoriteProducts, List<ProductBasket> basket, List<Order> orders) {
         this.id = id;
         this.userId = userId;
         this.user = user;
         this.balance = balance;
+        this.bankCards = bankCards;
         this.favoriteProducts = favoriteProducts;
         this.basket = basket;
         this.orders = orders;
     }
+
 
     public int getId() {
         return id;
@@ -99,11 +111,12 @@ public class Client {
         this.balance = balance;
     }
 
-    public List<Product> getFavoriteProducts() {
+    public List<FavoriteProduct> getFavoriteProducts() {
+
         return favoriteProducts;
     }
 
-    public void setFavoriteProducts(List<Product> favoriteProducts) {
+    public void setFavoriteProducts(List<FavoriteProduct> favoriteProducts) {
         this.favoriteProducts = favoriteProducts;
     }
 
@@ -121,5 +134,13 @@ public class Client {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public List<BankCard> getBankCards() {
+        return bankCards;
+    }
+
+    public void setBankCards(List<BankCard> bankCards) {
+        this.bankCards = bankCards;
     }
 }
