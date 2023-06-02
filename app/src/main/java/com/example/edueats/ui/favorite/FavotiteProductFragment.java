@@ -62,4 +62,9 @@ public class FavotiteProductFragment extends Fragment implements IProductAdapter
         favoriteProducts.remove(favoriteProduct);
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void goToBasket() {
+
+    }
 }

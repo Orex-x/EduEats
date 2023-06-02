@@ -62,7 +62,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         final TextView txtPrice;
         final TextView txtDescription;
         final ImageView imageView;
-        final Button btn, btnLove;
+        final Button btnAddBasket, btnLove;
 
         ViewHolder(View view, int position){
             txtName = view.findViewById(R.id.txtName);
@@ -70,10 +70,17 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             txtDescription = view.findViewById(R.id.txtDescription);
             imageView = view.findViewById(R.id.imageView);
 
-            btn = view.findViewById(R.id.btn);
+            btnAddBasket = view.findViewById(R.id.btnAddBasket);
             btnLove = view.findViewById(R.id.btnLove);
 
-            btn.setOnClickListener(v -> mListener.addToBasket(position));
+            btnAddBasket.setOnClickListener(v -> {
+                if(btnAddBasket.getText().toString().equals("Перейти в корзину")){
+                    mListener.goToBasket();
+                }else{
+                    btnAddBasket.setText("Перейти в корзину");
+                    mListener.addToBasket(position);
+                }
+            });
             btnLove.setOnClickListener(v -> mListener.addToFavorite(position));
         }
     }
