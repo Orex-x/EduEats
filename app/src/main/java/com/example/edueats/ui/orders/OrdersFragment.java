@@ -22,15 +22,18 @@ public class OrdersFragment extends Fragment implements IOrderAdapter {
 
     ListView list_orders;
     OrderAdapter adapter;
+    ArrayList<Order> orders;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_orders, container, false);
 
+        orders = new ArrayList<>(SingletonService.mainClient.getOrders());
+
         list_orders = v.findViewById(R.id.list);
-        ArrayList<Order> list = new ArrayList<>(SingletonService.mainClient.getOrders());
-        adapter = new OrderAdapter(getContext(), R.layout.item_order, list, this);
+        adapter = new OrderAdapter(getContext(), R.layout.item_order, orders, this);
+        list_orders.setAdapter(adapter);
 
         return v;
     }

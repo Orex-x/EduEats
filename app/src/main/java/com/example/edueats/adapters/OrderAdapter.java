@@ -12,6 +12,8 @@ import com.example.edueats.interfaces.ICardAdapter;
 import com.example.edueats.interfaces.IOrderAdapter;
 import com.example.edueats.models.BankCard;
 import com.example.edueats.models.Order;
+import com.example.edueats.models.ProductBasket;
+import com.example.edueats.services.SingletonService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -49,15 +51,24 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         final Order item = list.get(position);
 
         viewHolder.txtDate.setText(dateFormat.format(item.getDateTime()));
+        viewHolder.txtSum.setText(String.valueOf(item.getPrice()));
+
+        String menu = "";
+        for (ProductBasket pb : item.getProducts()){
+            menu += " - " + pb.getProduct().getName() + " | " + pb.getAmount() + "\n";
+        }
+        viewHolder.txtProducts.setText(menu);
 
         return convertView;
     }
 
     private class ViewHolder {
-        final TextView txtDate;
+        final TextView txtDate, txtProducts, txtSum;
 
         ViewHolder(View view, int position){
             txtDate = view.findViewById(R.id.txtDate);
+            txtProducts = view.findViewById(R.id.txtProducts);
+            txtSum = view.findViewById(R.id.txtSum);
         }
     }
 }

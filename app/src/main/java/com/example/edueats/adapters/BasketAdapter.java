@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.edueats.interfaces.IBasketAdapter;
 import com.example.edueats.R;
 import com.example.edueats.models.ProductBasket;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -36,9 +37,6 @@ public class BasketAdapter extends ArrayAdapter<ProductBasket> {
 
 
     public View getView(int position, View convertView, ViewGroup parent) {
-
-
-
         final BasketAdapter.ViewHolder viewHolder;
         if(convertView==null){
             convertView = inflater.inflate(this.layout, parent, false);
@@ -49,20 +47,19 @@ public class BasketAdapter extends ArrayAdapter<ProductBasket> {
             viewHolder = (BasketAdapter.ViewHolder) convertView.getTag();
         }
 
-
         final ProductBasket productBasket = productList.get(position);
 
         viewHolder.txtName.setText(productBasket.getProduct().getName());
         viewHolder.txtDescription.setText(productBasket.getProduct().getDescription());
         viewHolder.txtAmount.setText(String.valueOf(productBasket.getAmount()));
+        Picasso.get().load(productBasket.getProduct().getPathToImage()).into(viewHolder.imageView);
 
         int price = productBasket.getProduct().getPrice() * productBasket.getAmount();
         viewHolder.txtPrice.setText(String.valueOf(price));
 
-
-
         return convertView;
     }
+
     private class ViewHolder {
 
         final TextView txtName;

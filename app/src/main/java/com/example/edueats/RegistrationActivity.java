@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.edueats.models.Client;
 import com.example.edueats.models.User;
 import com.example.edueats.services.ApiClient;
 import com.example.edueats.services.SingletonService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -43,6 +47,23 @@ public class RegistrationActivity extends AppCompatActivity {
             Client client = new Client();
             client.setUser(user);
             client.setBalance(0);
+            client.setBankCards(new ArrayList<>());
+            client.setFavoriteProducts(new ArrayList<>());
+            client.setOrders(new ArrayList<>());
+            client.setBasket(new ArrayList<>());
+
+            List<Client> listClients = ApiClient.get(Client.class);
+
+            for (Client cl : listClients) {
+                if(cl.getUser().getEmail().equals(user.getEmail())){
+                    Toast.makeText(this, "Почта занята", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(cl.getUser().getLogin().equals(user.getLogin())){
+                    Toast.makeText(this, "Логин занят", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
 
             int id = ApiClient.create(client);
 

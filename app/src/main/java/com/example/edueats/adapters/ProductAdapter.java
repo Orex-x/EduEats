@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.example.edueats.R;
 import com.example.edueats.interfaces.IBasketAdapter;
 import com.example.edueats.interfaces.IProductAdapter;
+import com.example.edueats.models.Client;
 import com.example.edueats.models.Product;
+import com.example.edueats.models.ProductBasket;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -23,12 +25,14 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     private LayoutInflater inflater;
     private int layout;
     private ArrayList<Product> productList;
+    private Client client;
 
-    public ProductAdapter(Context context, int resource, ArrayList<Product> products) {
+    public ProductAdapter(Context context, int resource, ArrayList<Product> products, Client client) {
         super(context, resource, products);
         this.productList = products;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
+        this.client = client;
     }
 
     private static IProductAdapter mListener;
@@ -53,6 +57,12 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         viewHolder.txtDescription.setText(product.getDescription());
         viewHolder.txtPrice.setText(String.valueOf(product.getPrice()));
         Picasso.get().load(product.getPathToImage()).into(viewHolder.imageView);
+
+        /*for (ProductBasket pb : client.getBasket()) {
+            if(pb.getProduct().getId() == product.getId()){
+                viewHolder.btnAddBasket.setText("Перейти в корзину");
+            }
+        }*/
 
         return convertView;
     }

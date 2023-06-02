@@ -13,6 +13,7 @@ import com.example.edueats.R;
 import com.example.edueats.interfaces.IProductAdapter;
 import com.example.edueats.models.FavoriteProduct;
 import com.example.edueats.models.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,7 @@ public class ProductFavoriteAdapter extends ArrayAdapter<FavoriteProduct> {
         viewHolder.txtName.setText(favoriteProduct.getProduct().getName());
         viewHolder.txtDescription.setText(favoriteProduct.getProduct().getDescription());
         viewHolder.txtPrice.setText(String.valueOf(favoriteProduct.getProduct().getPrice()));
+        Picasso.get().load(favoriteProduct.getProduct().getPathToImage()).into(viewHolder.imageView);
 
         return convertView;
     }

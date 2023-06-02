@@ -1,6 +1,5 @@
 package com.example.edueats.ui.dashboard;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,18 +8,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.edueats.AddCardActivity;
-import com.example.edueats.CheckActivity;
 import com.example.edueats.PayActivity;
 import com.example.edueats.interfaces.IBasketAdapter;
 import com.example.edueats.R;
 import com.example.edueats.adapters.BasketAdapter;
-import com.example.edueats.interfaces.IDashboardFragment;
 import com.example.edueats.models.ProductBasket;
 import com.example.edueats.services.ApiClient;
 import com.example.edueats.services.SingletonService;
@@ -36,18 +31,6 @@ public class DashboardFragment extends Fragment implements IBasketAdapter {
 
     List<ProductBasket> products;
     BasketAdapter adapter;
-
-    private IDashboardFragment mListener;
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof IDashboardFragment) {
-            mListener = (IDashboardFragment) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement FragmentInteractionListener");
-        }
-    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

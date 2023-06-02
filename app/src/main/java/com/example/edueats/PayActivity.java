@@ -11,10 +11,13 @@ import android.widget.Toast;
 import com.example.edueats.adapters.CardAdapter;
 import com.example.edueats.interfaces.ICardAdapter;
 import com.example.edueats.models.BankCard;
+import com.example.edueats.models.Order;
+import com.example.edueats.models.OrderStatus;
 import com.example.edueats.services.ApiClient;
 import com.example.edueats.services.SingletonService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PayActivity extends AppCompatActivity implements ICardAdapter {
@@ -50,6 +53,14 @@ public class PayActivity extends AppCompatActivity implements ICardAdapter {
         btnPay.setOnClickListener(v -> {
             SingletonService.mainClient.spend(sum);
 
+            Order order = new Order();
+            order.setOrderStatus(OrderStatus.Collecting);
+            order.setDateTime(new Date());
+            order.setPrice(SingletonService.sumOrder);
+            order.setProducts(SingletonService.mainClient.getBasket());
+
+            SingletonService.mainClient.addOrder(order);
+
             ApiClient.update(SingletonService.mainClient);
 
             Intent intent = new Intent(this, CheckActivity.class);
@@ -58,13 +69,20 @@ public class PayActivity extends AppCompatActivity implements ICardAdapter {
 
     }
 
+
     @Override
     public void click(int position) {
-        SingletonService.mainClient.spend(SingletonService.sumOrder);
-
-        ApiClient.update(SingletonService.mainClient);
-
         Intent intent = new Intent(this, CheckActivity.class);
         startActivity(intent);
+
+        Order order = new Order();
+        order.setOrderStatus(OrderStatus.Collecting);
+        order.setDateTime(new Date());
+        order.setPrice(SingletonService.sumOrder);
+        order.setProducts(SingletonService.mainClient.getBasket());
+
+        SingletonService.mainClient.addOrder(order);
+
+        ApiClient.update(SingletonService.mainClient);
     }
 }

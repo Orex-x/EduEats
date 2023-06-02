@@ -26,6 +26,11 @@ public class Client {
     public Client() {
     }
 
+    public void addOrder(Order order){
+        if(orders == null) orders = new ArrayList<>();
+        this.orders.add(order);
+    }
+
 
     public void addBankCard(BankCard card){
         if(bankCards == null) bankCards = new ArrayList<>();

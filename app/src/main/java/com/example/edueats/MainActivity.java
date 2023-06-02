@@ -2,7 +2,7 @@ package com.example.edueats;
 
 import android.os.Bundle;
 
-import com.example.edueats.interfaces.IDashboardFragment;
+import com.example.edueats.interfaces.IHomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +13,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.edueats.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements IDashboardFragment {
+public class MainActivity extends AppCompatActivity implements IHomeFragment {
 
     private ActivityMainBinding binding;
     private AppBarConfiguration appBarConfiguration;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +33,14 @@ public class MainActivity extends AppCompatActivity implements IDashboardFragmen
                 R.id.navigation_home,
                 R.id.navigation_dashboard,
                 R.id.navigation_notifications,
-                R.id.navigation_favorite_products)
+                R.id.navigation_favorite_products,
+                R.id.navigation_orders)
                 .build();
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        NavigationUI.setupWithNavController(navView, navController);
+
     }
 
 
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements IDashboardFragmen
     }
 
     private void navigateToFragment(int fragmentId) {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        binding.navView.setSelectedItemId(fragmentId);
         navController.navigate(fragmentId);
     }
 

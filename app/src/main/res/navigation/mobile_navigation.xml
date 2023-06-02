@@ -28,4 +28,10 @@
         android:name="com.example.edueats.ui.favorite.FavotiteProductFragment"
         android:label="Favorite"
         tools:layout="@layout/fragment_favotite_product" />
+
+    <fragment
+        android:id="@+id/navigation_orders"
+        android:name="com.example.edueats.ui.orders.OrdersFragment"
+        android:label="Orders"
+        tools:layout="@layout/fragment_orders" />
 </navigation>
